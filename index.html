@@ -61,6 +61,7 @@
                 font-family: Arial, sans serif;
                 font-size: 16px;
                 z-index: 9999;">
+            loading...
             </div>
         </div>
         <script src="resources/qgis2web_expressions.js"></script>
@@ -76,8 +77,7 @@
         <script>
             function updateClock() {
                 const now = new date();
-                const timeString = now.toLocateTimeString(); // Customize using locale or format options
-                document.getElementById('clock').textContent = timeString
+                document.getElementById('clock').textContent = now.toLocaterTimeString();
             }
             set interval (updateClock, 1000); // Updates every second
             updateClock(); // Run imediatly on Load
@@ -85,5 +85,6 @@
         </script>
     </body>
 </html>
+
 
 

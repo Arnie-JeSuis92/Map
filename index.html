@@ -75,15 +75,17 @@
         <script src="./resources/Autolinker.min.js"></script>
         <script src="./resources/qgis2web.js"></script>
         <script>
-            function updateClock() {
-                const now = new Date();
-                document.getElementById('clock').textContent = now.toLocateTimeString();
-            }
-            set interval (updateClock, 1000); // Updates every second
-            updateClock(); // Run imediatly on Load
+          alert("Clock script is running!");  // This should pop up when you load the page
+          function updateClock() {
+          const now = new Date();
+          document.getElementById('clock').textContent = now.toLocaleTimeString();
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
         </script>
     </body>
 </html>
+
 
 
 

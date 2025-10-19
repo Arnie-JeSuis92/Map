@@ -73,6 +73,17 @@
         <script src="./layers/layers.js" type="text/javascript"></script> 
         <script src="./resources/Autolinker.min.js"></script>
         <script src="./resources/qgis2web.js"></script>
+        <script>
+            function updateClock() {
+                const now = new date();
+                const timeString = now.toLocateTimeString(); // Customize using locale or format options
+                document.getElementById('clock').textContent = timeString
+            }
+            set interval (updateClock, 1000); // Updates every second
+            updateClock(); // Run imediatly on Load
+        </script>
+        </script>
     </body>
 </html>
+
 

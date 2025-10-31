@@ -75,17 +75,18 @@
         <script src="./resources/Autolinker.min.js"></script>
         <script src="./resources/qgis2web.js"></script>
        <script>
-           window.onload = function(){
-               function updateClock(){
-                   const now = new Date();
-                   document.getElementById('clock').textContent = now.toLocaleTimeString();
-               }
+           window.onload = function() {
+           function updateClock() {
+           const now = new Date();
+               document.getElementById('clock') = now.toLocaleTimeString();
+           }
                setInterval(updateClock, 1000);
                updateClock(Date);
-           };
+           }
        </script>
     </body>
 </html>
+
 
 
 

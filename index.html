@@ -77,7 +77,7 @@
            window.onload = function(){
                function updateClock(){
                    const now = newDate();
-                   document.getElementById('clock').textContent = now.toLocaleTimeString();
+                   document.getElementById('clock').textContent = now.toLocalTimeString();
                }
                setInterval(updateClock, 1000);
                updateClock();
@@ -85,6 +85,7 @@
        </script>
     </body>
 </html>
+
 
 
 

@@ -80,7 +80,7 @@ const highlightStyle = new ol.style.Style({
         width: 3
     }),
     fill: new ol.style.Fill({
-        color: 'rgba(255,255,0,0.2)'
+        color: 'rgba(255,255,0,0.25)'
     })
 });
 
@@ -94,37 +94,63 @@ map.on('pointermove', function (evt) {
         lastFeature = null;
     }
 
-    const feature = map.forEachFeatureAtPixel(evt.pixel, f => f);
+    const feature = map.forEachFeatureAtPixel(evt.pixel, function (f, layer) {
+        return { feature: f, layer: layer };
+    });
 
-    if (feature) {
-
-        lastFeature = feature;
-        originalStyle = feature.getStyle();
-
-        feature.setStyle(highlightStyle);
-
-        const geom = feature.getGeometry().getType();
-
-        let label = "Unknown feature";
-
-        if (geom.includes("Polygon")) {
-            label = "Land / Country area";
-        } else if (geom.includes("LineString")) {
-            label = "Border / Coastline / Water boundary";
-        }
-
-        infoBox.innerHTML = `
-            <b>${label}</b><br>
-            Type: ${geom}
-        `;
-
-        infoBox.style.display = "block";
-        map.getTargetElement().style.cursor = "pointer";
-
-    } else {
+    if (!feature) {
         infoBox.style.display = "none";
         map.getTargetElement().style.cursor = "";
+        return;
     }
+
+    const f = feature.feature;
+    const layer = feature.layer;
+
+    lastFeature = f;
+    originalStyle = f.getStyle();
+
+    f.setStyle(highlightStyle);
+
+    let label = "Unknown";
+
+    /* ---------------- LAYER DETECTION ---------------- */
+
+    if (layer) {
+        const layerName = layer.get('title') || layer.get('name') || '';
+
+        if (layerName.toLowerCase().includes("osm")) {
+            label = "OpenStreetMap feature";
+        }
+        else if (layerName.toLowerCase().includes("ocean") ||
+                 layerName.toLowerCase().includes("depth") ||
+                 layerName.toLowerCase().includes("bathym")) {
+            label = "Ocean depth / bathymetry";
+        }
+        else if (layerName.toLowerCase().includes("worldmap") ||
+                 layerName.toLowerCase().includes("country")) {
+            label = "Country / Land area";
+        }
+        else if (layerName.toLowerCase().includes("coast")) {
+            label = "Coastline";
+        }
+        else {
+            label = "Map feature";
+        }
+    }
+
+    /* ---------------- GEOMETRY FALLBACK ---------------- */
+
+    const geom = f.getGeometry().getType();
+
+    infoBox.innerHTML = `
+        <b>${label}</b><br>
+        Geometry: ${geom}
+    `;
+
+    infoBox.style.display = "block";
+    map.getTargetElement().style.cursor = "pointer";
+
 });
 
 </script>

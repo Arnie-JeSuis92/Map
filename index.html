@@ -74,16 +74,19 @@
         <script src="./layers/layers.js" type="text/javascript"></script> 
         <script src="./resources/Autolinker.min.js"></script>
         <script src="./resources/qgis2web.js"></script>
-       <script>
-           window.onload = function() {
-           function updateClock() {
-           const now = new Date();
-               document.getElementById('clock') = now.toLocaleTimeString();
-           }
-               setInterval(updateClock, 1000);
-               updateClock(Date);
-           }
-       </script>
+        <script>
+        window.onload = function() {
+
+        function updateClock() {
+             const now = new Date();
+        document.getElementById('clock').innerHTML =
+            now.toLocaleTimeString();
+       }
+
+       updateClock();
+       setInterval(updateClock, 1000);
+};
+</script>
     </body>
 </html>
 

@@ -81,6 +81,7 @@ html, body, #map {
 console.log("WorldMap loaded:", typeof json_WorldMap_1);
 </script>
 
+<div id="country-info"></div>
 
 <script>
 /* ---------------- CLOCK ---------------- */
@@ -94,7 +95,6 @@ setInterval(updateClock, 1000);
 
 /* ---------------- HOVER HIGHLIGHT ---------------- */
 
-<div id="country-info"></div>
 const infoBox = document.getElementById('country-info');
 
 const highlightStyle = new ol.style.Style({

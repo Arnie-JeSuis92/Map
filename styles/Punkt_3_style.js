@@ -1,4 +1,4 @@
-var size = 1;
+var size = 0;
 var placement = 'point';
 
 var style_Punkt_3 = function(feature, resolution){
